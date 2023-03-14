@@ -12,10 +12,14 @@ public class PlayingCard {
     public static final char[] suits = { 'S', 'H', 'C', 'D' };
     public static final int NUM_FACES = 13;
     public static final int NUM_SUITS = suits.length;
+    public static final char SPADES   = suits[0];
+    public static final char HEARTS   = suits[1];
+    public static final char CLUBS    = suits[2];
+    public static final char DIAMONDS = suits[3];
 
 
 
-    private final char suit; // 'S'=spade, 'H'=heart, 'D'=diamonds, 'C'=clubs
+    private final byte suit; // 'S'=spade, 'H'=heart, 'D'=diamonds, 'C'=clubs
     private final int face; // a number between 1 and 13
 
     private final int hashCode;
@@ -25,21 +29,19 @@ public class PlayingCard {
      *
      * @param suit The suit of the card, as a single character. 'S' for Spades,
      *             'H' for Heart, 'D' for Diamonds and 'C' for clubs
-     * @param face The face value of the card, an integer between 0 and 12
+     * @param face The face value of the card, an integer between 1 and 13
      */
     public PlayingCard(char suit, int face) {
         switch (suit) {
-            case 'S':
-            case 'H':
-            case 'D':
-            case 'C':
-                this.suit = suit;
-                break;
-            default: throw new IllegalArgumentException("Suit must be one of the following: S, H, D, C");
+            case 'S' -> this.suit = 0;
+            case 'H' -> this.suit = 1;
+            case 'D' -> this.suit = 2;
+            case 'C' -> this.suit = 3;
+            default -> throw new IllegalArgumentException("Suit must be one of the following: S, H, D, C");
         }
 
-        if (face < 0 || face > 12)
-            throw new IllegalArgumentException("Face must be a value between 0 and 12");
+        if (face < 1 || face > 13)
+            throw new IllegalArgumentException("Face must be a value between 1 and 13");
         this.face = face;
 
         hashCode = suit * NUM_FACES + face;
@@ -65,7 +67,7 @@ public class PlayingCard {
      * @return the suit and face of the card as a string
      */
     public String getAsString() {
-        return String.format("%s%s", suit, face);
+        return String.format("%s%s", suits[suit], face);
     }
 
     /**
@@ -74,6 +76,14 @@ public class PlayingCard {
      * @return the suit of the card
      */
     public char getSuit() {
+        return suits[suit];
+    }
+
+    /**
+     *
+     * @return
+     */
+    public int getSuitIndex() {
         return suit;
     }
 

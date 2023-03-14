@@ -2,19 +2,18 @@ package ntnu.idatt2001.cards;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 import java.util.Random;
 
 public class DeckOfCards {
 
     private static final char[] suits = PlayingCard.suits;
-    public static final int STACK_SIZE = 52;
+    public static final int MAX_DECK_SIZE = 52;
     private static final int NUM_FACES = PlayingCard.NUM_FACES;
     private static final int NUM_SUITS = PlayingCard.NUM_SUITS;
 
 
 
-    private final ArrayList<PlayingCard> cards = new ArrayList<>(STACK_SIZE);
+    private final ArrayList<PlayingCard> cards = new ArrayList<>(MAX_DECK_SIZE);
 
     public DeckOfCards() {
         fillDeckSorted();
@@ -25,7 +24,7 @@ public class DeckOfCards {
         if (getDeckSize() != 0)
             cards.clear();
         for (int suit_i = 0; suit_i < NUM_SUITS; suit_i++)
-            for (int face = 0; face < NUM_FACES; face++)
+            for (int face = 1; face < NUM_FACES+1; face++)
                 cards.add(new PlayingCard(suits[suit_i], face));
     }
 
@@ -66,8 +65,8 @@ public class DeckOfCards {
     }
 
     public void returnCard(PlayingCard card) {
-        if (getDeckSize() >= STACK_SIZE)
-            throw new IllegalArgumentException("Deck cannot contain more cards than " + STACK_SIZE + ".");
+        if (getDeckSize() >= MAX_DECK_SIZE)
+            throw new IllegalArgumentException("Deck cannot contain more cards than " + MAX_DECK_SIZE + ".");
         if (contains(card))
             throw new IllegalArgumentException("Deck cannot contain multiple cards of same suit and type.");
 
@@ -76,6 +75,9 @@ public class DeckOfCards {
     }
 
     public void returnHand(PlayingCard[] cards) {
+        if (cards == null)
+            return;
+
         for (PlayingCard c : cards)
             returnCard(c);
     }

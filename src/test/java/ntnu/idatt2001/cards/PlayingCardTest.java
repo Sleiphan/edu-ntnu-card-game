@@ -22,7 +22,7 @@ public class PlayingCardTest {
         PlayingCard[] cards = new PlayingCard[52];
         for (int suit = 0; suit < PlayingCard.NUM_SUITS; suit++)
             for (int face = 0; face < PlayingCard.NUM_FACES; face++)
-                cards[suit * PlayingCard.NUM_FACES + face] = new PlayingCard(PlayingCard.suits[suit], face);
+                cards[suit * PlayingCard.NUM_FACES + face] = new PlayingCard(PlayingCard.suits[suit], face+1);
 
         for (PlayingCard card : cards) assert (card.equals(card));
 

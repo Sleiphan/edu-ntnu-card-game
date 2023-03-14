@@ -1,7 +1,5 @@
 package ntnu.idatt2001.cards;
 
-import ntnu.idatt2001.cards.DeckOfCards;
-import ntnu.idatt2001.cards.PlayingCard;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -41,11 +39,11 @@ public class DeckOfCardsTest {
         int cardAmount = 5;
 
         DeckOfCards deck = new DeckOfCards();
-        assert(deck.getDeckSize() == DeckOfCards.STACK_SIZE);
+        assert(deck.getDeckSize() == DeckOfCards.MAX_DECK_SIZE);
 
         PlayingCard[] cards = deck.dealHand(cardAmount);
         assert(cards.length == cardAmount);
-        assert(deck.getDeckSize() == DeckOfCards.STACK_SIZE - cardAmount);
+        assert(deck.getDeckSize() == DeckOfCards.MAX_DECK_SIZE - cardAmount);
         for (PlayingCard c : cards)
             assert(!deck.contains(c));
     }

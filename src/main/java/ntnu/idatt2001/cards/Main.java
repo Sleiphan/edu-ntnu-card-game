@@ -10,7 +10,7 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
         this.stage = stage;
-        stage.setScene(MainFrontend.getInitialScene());
+        stage.setScene(new MainFrontend().getScene());
         stage.show();
     }
 
